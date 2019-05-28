@@ -1,0 +1,54 @@
+{smcl}
+{txt}{sf}{ul off}{.-}
+      name:  {res}<unnamed>
+       {txt}log:  {res}/Users/eric/Work/Parnassus/Olgin/Avram/HEH Heart Rate/Programs/within person variability.smcl
+  {txt}log type:  {res}smcl
+ {txt}opened on:  {res}19 Apr 2019, 15:35:48
+{txt}
+{com}. 
+.         qui import delimited using ///
+>                 "$boxdata/geomeans_overall.csv", ///
+>                 clear varnames(1) delim(",") 
+{txt}
+{com}.         
+.         tabstat sd_bpm range_bpm, s(n mean sd min p25 p50 p75 max) format(%8.3g)
+
+{txt}   stats {...}
+{c |}{...}
+    sd_bpm  range_~m
+{hline 9}{c +}{hline 20}
+{ralign 8:N} {...}
+{c |}{...}
+  {res}   30708     31401
+{txt}{ralign 8:mean} {...}
+{c |}{...}
+  {res}    15.6      63.7
+{txt}{ralign 8:sd} {...}
+{c |}{...}
+  {res}    8.91      40.3
+{txt}{ralign 8:min} {...}
+{c |}{...}
+  {res}    .013         0
+{txt}{ralign 8:p25} {...}
+{c |}{...}
+  {res}    9.34      31.9
+{txt}{ralign 8:p50} {...}
+{c |}{...}
+  {res}    13.7      57.4
+{txt}{ralign 8:p75} {...}
+{c |}{...}
+  {res}    20.1      91.4
+{txt}{ralign 8:max} {...}
+{c |}{...}
+  {res}    92.4       197
+{txt}{hline 9}{c BT}{hline 20}
+
+{com}. 
+. log close
+      {txt}name:  {res}<unnamed>
+       {txt}log:  {res}/Users/eric/Work/Parnassus/Olgin/Avram/HEH Heart Rate/Programs/within person variability.smcl
+  {txt}log type:  {res}smcl
+ {txt}closed on:  {res}19 Apr 2019, 15:35:48
+{txt}{.-}
+{smcl}
+{txt}{sf}{ul off}

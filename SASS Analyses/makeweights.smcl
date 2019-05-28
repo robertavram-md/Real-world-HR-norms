@@ -1,0 +1,187 @@
+{smcl}
+{com}{sf}{ul off}{txt}{.-}
+      name:  {res}<unnamed>
+       {txt}log:  {res}/Users/eric/Work/Parnassus/Olgin/Avram/HEH Heart Rate/Programs/makeweights.smcl
+  {txt}log type:  {res}smcl
+ {txt}opened on:  {res}19 Apr 2019, 15:08:46
+{txt}
+{com}. makeweights
+{res}
+{txt}Performing EM optimization: 
+{res}
+{txt}Performing gradient-based optimization: 
+{res}
+{txt}Iteration 0:{space 3}log likelihood = {res: 652201.72}  
+{res}{txt}Iteration 1:{space 3}log likelihood = {res: 652201.72}  
+{res}
+{txt}Mixed-effects ML regression{col 49}Number of obs{col 67}={col 69}{res} 3,855,599
+{txt}Group variable: {res}user_id{col 49}{txt}Number of groups{col 67}={col 69}{res}    81,152
+
+{txt}{col 49}Obs per group:
+{col 63}min{col 67}={col 69}{res}         1
+{txt}{col 63}avg{col 67}={col 69}{res}      47.5
+{txt}{col 63}max{col 67}={col 69}{res}     1,000
+
+{col 49}{txt}Wald chi2({res}0{txt}){col 67}={col 70}{res}        .
+{txt}Log likelihood = {res} 652201.72{col 49}{txt}Prob > chi2{col 67}={col 73}{res}     .
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}      logbpm{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      z{col 46}   P>|z|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 7}_cons {c |}{col 14}{res}{space 2} 4.353851{col 26}{space 2} .0006348{col 37}{space 1} 6859.09{col 46}{space 3}0.000{col 54}{space 4} 4.352607{col 67}{space 3} 4.355095
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+
+{hline 29}{c TT}{hline 48}
+{col 3}Random-effects Parameters{col 30}{c |}{col 34}Estimate{col 45}Std. Err.{col 59}[95% Conf. Interval]
+{hline 29}{c +}{hline 48}
+{res}user_id{txt}: Identity{col 30}{c |}
+{col 19}var(_cons){col 30}{c |}{res}{col 33} .0286182{col 44}        .{col 58}        .{col 70}        .
+{txt}{hline 29}{c +}{hline 48}
+{col 16}var(Residual){col 30}{c |}{res}{col 33} .0394255{col 44}        .{col 58}        .{col 70}        .
+{txt}{hline 29}{c BT}{hline 48}
+LR test vs. linear model:{col 27}{help j_chibar##|_new:chibar2(01) =} {res}2.1e+06{col 55}{txt}Prob >= chibar2 = {col 73}{res}0.0000
+
+{txt}Intraclass correlation
+
+{res}{col 1}{text}{hline 29}{c TT}{hline 12}{hline 12}{hline 12}{hline 12}
+{col 1}{text}                       Level{col 30}{c |}        ICC{col 43}  Std. Err.{col 55}    [95% Conf. Interval]
+{res}{col 1}{text}{hline 29}{c +}{hline 12}{hline 12}{hline 12}{hline 12}
+{col 1}{text}                     user_id{col 30}{c |}{result}{space 2}  .420586{col 43}{space 1}        0{col 55}{space 3}  .420586{col 67}{space 3}  .420586
+{col 1}{text}{hline 29}{c BT}{hline 12}{hline 12}{hline 12}{hline 12}
+{res}
+{txt}Performing EM optimization: 
+{res}
+{txt}Performing gradient-based optimization: 
+{res}
+{txt}Iteration 0:{space 3}log likelihood = {res:-5196461.5}  
+{res}{txt}Iteration 1:{space 3}log likelihood = {res:-5196461.5}  
+{res}
+{txt}Mixed-effects ML regression{col 49}Number of obs{col 67}={col 69}{res} 3,841,746
+{txt}Group variable: {res}user_id{col 49}{txt}Number of groups{col 67}={col 69}{res}    81,144
+
+{txt}{col 49}Obs per group:
+{col 63}min{col 67}={col 69}{res}         1
+{txt}{col 63}avg{col 67}={col 69}{res}      47.3
+{txt}{col 63}max{col 67}={col 69}{res}     1,000
+
+{col 49}{txt}Wald chi2({res}0{txt}){col 67}={col 70}{res}        .
+{txt}Log likelihood = {res}-5196461.5{col 49}{txt}Prob > chi2{col 67}={col 73}{res}     .
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}    logrmssd{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      z{col 46}   P>|z|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 7}_cons {c |}{col 14}{res}{space 2} 4.004116{col 26}{space 2} .0020086{col 37}{space 1} 1993.46{col 46}{space 3}0.000{col 54}{space 4} 4.000179{col 67}{space 3} 4.008053
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+
+{hline 29}{c TT}{hline 48}
+{col 3}Random-effects Parameters{col 30}{c |}{col 34}Estimate{col 45}Std. Err.{col 59}[95% Conf. Interval]
+{hline 29}{c +}{hline 48}
+{res}user_id{txt}: Identity{col 30}{c |}
+{col 19}var(_cons){col 30}{c |}{res}{col 33} .2540754{col 44}        .{col 58}        .{col 70}        .
+{txt}{hline 29}{c +}{hline 48}
+{col 16}var(Residual){col 30}{c |}{res}{col 33} .8398016{col 44}        .{col 58}        .{col 70}        .
+{txt}{hline 29}{c BT}{hline 48}
+LR test vs. linear model:{col 27}{help j_chibar##|_new:chibar2(01) =} {res}8.3e+05{col 55}{txt}Prob >= chibar2 = {col 73}{res}0.0000
+
+{txt}Intraclass correlation
+
+{res}{col 1}{text}{hline 29}{c TT}{hline 12}{hline 12}{hline 12}{hline 12}
+{col 1}{text}                       Level{col 30}{c |}        ICC{col 43}  Std. Err.{col 55}    [95% Conf. Interval]
+{res}{col 1}{text}{hline 29}{c +}{hline 12}{hline 12}{hline 12}{hline 12}
+{col 1}{text}                     user_id{col 30}{c |}{result}{space 2} .2322706{col 43}{space 1}        0{col 55}{space 3} .2322706{col 67}{space 3} .2322706
+{col 1}{text}{hline 29}{c BT}{hline 12}{hline 12}{hline 12}{hline 12}
+{res}
+{txt}Performing EM optimization: 
+{res}
+{txt}Performing gradient-based optimization: 
+{res}
+{txt}Iteration 0:{space 3}log likelihood = {res:-5315500.9}  
+{res}{txt}Iteration 1:{space 3}log likelihood = {res:-5315500.9}  
+{res}
+{txt}Mixed-effects ML regression{col 49}Number of obs{col 67}={col 69}{res} 3,842,215
+{txt}Group variable: {res}user_id{col 49}{txt}Number of groups{col 67}={col 69}{res}    81,142
+
+{txt}{col 49}Obs per group:
+{col 63}min{col 67}={col 69}{res}         1
+{txt}{col 63}avg{col 67}={col 69}{res}      47.4
+{txt}{col 63}max{col 67}={col 69}{res}     1,000
+
+{col 49}{txt}Wald chi2({res}0{txt}){col 67}={col 70}{res}        .
+{txt}Log likelihood = {res}-5315500.9{col 49}{txt}Prob > chi2{col 67}={col 73}{res}     .
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}     logsdsd{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      z{col 46}   P>|z|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 7}_cons {c |}{col 14}{res}{space 2} 4.020495{col 26}{space 2} .0020077{col 37}{space 1} 2002.55{col 46}{space 3}0.000{col 54}{space 4}  4.01656{col 67}{space 3}  4.02443
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+
+{hline 29}{c TT}{hline 48}
+{col 3}Random-effects Parameters{col 30}{c |}{col 34}Estimate{col 45}Std. Err.{col 59}[95% Conf. Interval]
+{hline 29}{c +}{hline 48}
+{res}user_id{txt}: Identity{col 30}{c |}
+{col 19}var(_cons){col 30}{c |}{res}{col 33} .2503646{col 44}        .{col 58}        .{col 70}        .
+{txt}{hline 29}{c +}{hline 48}
+{col 16}var(Residual){col 30}{c |}{res}{col 33} .8943236{col 44}        .{col 58}        .{col 70}        .
+{txt}{hline 29}{c BT}{hline 48}
+LR test vs. linear model:{col 27}{help j_chibar##|_new:chibar2(01) =} {res}7.7e+05{col 55}{txt}Prob >= chibar2 = {col 73}{res}0.0000
+
+{txt}Intraclass correlation
+
+{res}{col 1}{text}{hline 29}{c TT}{hline 12}{hline 12}{hline 12}{hline 12}
+{col 1}{text}                       Level{col 30}{c |}        ICC{col 43}  Std. Err.{col 55}    [95% Conf. Interval]
+{res}{col 1}{text}{hline 29}{c +}{hline 12}{hline 12}{hline 12}{hline 12}
+{col 1}{text}                     user_id{col 30}{c |}{result}{space 2} .2187186{col 43}{space 1}        0{col 55}{space 3} .2187186{col 67}{space 3} .2187186
+{col 1}{text}{hline 29}{c BT}{hline 12}{hline 12}{hline 12}{hline 12}
+{res}
+{txt}Performing EM optimization: 
+{res}
+{txt}Performing gradient-based optimization: 
+{res}
+{txt}Iteration 0:{space 3}log likelihood = {res:-7585267.9}  
+{res}{txt}Iteration 1:{space 3}log likelihood = {res:-7585267.9}  
+{res}
+{txt}Mixed-effects ML regression{col 49}Number of obs{col 67}={col 69}{res} 3,855,599
+{txt}Group variable: {res}user_id{col 49}{txt}Number of groups{col 67}={col 69}{res}    81,152
+
+{txt}{col 49}Obs per group:
+{col 63}min{col 67}={col 69}{res}         1
+{txt}{col 63}avg{col 67}={col 69}{res}      47.5
+{txt}{col 63}max{col 67}={col 69}{res}     1,000
+
+{col 49}{txt}Wald chi2({res}0{txt}){col 67}={col 70}{res}        .
+{txt}Log likelihood = {res}-7585267.9{col 49}{txt}Prob > chi2{col 67}={col 73}{res}     .
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1} logsteps24h{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      z{col 46}   P>|z|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 7}_cons {c |}{col 14}{res}{space 2} 1.253353{col 26}{space 2} .0094058{col 37}{space 1}  133.25{col 46}{space 3}0.000{col 54}{space 4} 1.234918{col 67}{space 3} 1.271788
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+
+{hline 29}{c TT}{hline 48}
+{col 3}Random-effects Parameters{col 30}{c |}{col 34}Estimate{col 45}Std. Err.{col 59}[95% Conf. Interval]
+{hline 29}{c +}{hline 48}
+{res}user_id{txt}: Identity{col 30}{c |}
+{col 19}var(_cons){col 30}{c |}{res}{col 33} 6.846266{col 44}        .{col 58}        .{col 70}        .
+{txt}{hline 29}{c +}{hline 48}
+{col 16}var(Residual){col 30}{c |}{res}{col 33} 2.761778{col 44}        .{col 58}        .{col 70}        .
+{txt}{hline 29}{c BT}{hline 48}
+LR test vs. linear model:{col 27}{help j_chibar##|_new:chibar2(01) =} {res}5.6e+06{col 55}{txt}Prob >= chibar2 = {col 73}{res}0.0000
+
+{txt}Intraclass correlation
+
+{res}{col 1}{text}{hline 29}{c TT}{hline 12}{hline 12}{hline 12}{hline 12}
+{col 1}{text}                       Level{col 30}{c |}        ICC{col 43}  Std. Err.{col 55}    [95% Conf. Interval]
+{res}{col 1}{text}{hline 29}{c +}{hline 12}{hline 12}{hline 12}{hline 12}
+{col 1}{text}                     user_id{col 30}{c |}{result}{space 2} .7125556{col 43}{space 1}        0{col 55}{space 3} .7125556{col 67}{space 3} .7125556
+{col 1}{text}{hline 29}{c BT}{hline 12}{hline 12}{hline 12}{hline 12}
+{res}{txt}file /Users/eric/Box Sync/HEH Heart Rate/New Analyses/main files/geomeans_overall.csv saved
+{res}{txt}file /Users/eric/Box Sync/HEH Heart Rate/New Analyses/main files/geomeans_timecat_resting.csv saved
+
+{com}. log close
+      {txt}name:  {res}<unnamed>
+       {txt}log:  {res}/Users/eric/Work/Parnassus/Olgin/Avram/HEH Heart Rate/Programs/makeweights.smcl
+  {txt}log type:  {res}smcl
+ {txt}closed on:  {res}19 Apr 2019, 15:18:10
+{txt}{.-}
+{smcl}
+{txt}{sf}{ul off}

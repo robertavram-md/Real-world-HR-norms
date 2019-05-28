@@ -1,0 +1,263 @@
+{smcl}
+{com}{sf}{ul off}{txt}{.-}
+      name:  {res}<unnamed>
+       {txt}log:  {res}/Users/eric/Work/Parnassus/Olgin/Avram/HEH Heart Rate/Programs/time and resting effects.smcl
+  {txt}log type:  {res}smcl
+ {txt}opened on:  {res}19 Apr 2019, 15:34:32
+{txt}
+{com}. 
+.         qui import delimited using ///
+>                 "$boxdata/geomeans_timecat_resting.csv", ///
+>                 clear varnames(1) delim(",") 
+{txt}
+{com}.                 
+.         rename timecat tmp
+{res}{txt}
+{com}.         encode tmp, gen(timecat)
+{txt}
+{com}.         
+.         * select for complete data
+.         foreach x of varlist geomean_bpm resting timecat ///
+>                 consent_age sex new_race ///
+>                 diabetes arrhythmia sleep_apnea copd asthma hbp ///
+>                 high_chol pvd heart_attack blockages stroke chf ///
+>                 beta_* amiodarone {c -(}
+{txt}  2{com}.                 qui drop if missing(`x')
+{txt}  3{com}.                 {c )-}
+{txt}
+{com}.                 
+.         regress geomean_bpm i.resting [pw=wt_bpm], ///
+>                 vce(cluster user_id) cformat(%8.2f)                     
+{txt}(sum of wgt is 114,088.765032828)
+
+Linear regression                               Number of obs     = {res}   110,973
+                                                {txt}F(1, 31392)       =  {res}   175.45
+                                                {txt}Prob > F          = {res}    0.0000
+                                                {txt}R-squared         = {res}    0.0025
+                                                {txt}Root MSE          =    {res} 16.446
+
+{txt}{ralign 78:(Std. Err. adjusted for {res:31,393} clusters in user_id)}
+{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26}    Robust
+{col 1} geomean_bpm{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 3}1.resting {c |}{col 14}{res}{space 2}     3.44{col 26}{space 2}     0.26{col 37}{space 1}   13.25{col 46}{space 3}0.000{col 54}{space 4}     2.93{col 67}{space 3}     3.95
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2}    77.14{col 26}{space 2}     0.08{col 37}{space 1}  949.55{col 46}{space 3}0.000{col 54}{space 4}    76.98{col 67}{space 3}    77.29
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}.         
+.         regress geomean_bpm i.resting ///
+>                 consent_age sex i.new_race ///
+>                 diabetes arrhythmia sleep_apnea copd asthma hbp ///
+>                 high_chol pvd heart_attack blockages stroke chf ///
+>                 beta_* amiodarone  ///
+>                 [pw=wt_bpm], vce(cluster user_id) cformat(%8.2f) 
+{txt}(sum of wgt is 114,088.765032828)
+
+Linear regression                               Number of obs     = {res}   110,973
+                                                {txt}F(23, 31392)      =  {res}   145.76
+                                                {txt}Prob > F          = {res}    0.0000
+                                                {txt}R-squared         = {res}    0.0708
+                                                {txt}Root MSE          =    {res} 15.874
+
+{txt}{ralign 90:(Std. Err. adjusted for {res:31,393} clusters in user_id)}
+{hline 25}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 26}{c |}{col 38}    Robust
+{col 1}             geomean_bpm{col 26}{c |}      Coef.{col 38}   Std. Err.{col 50}      t{col 58}   P>|t|{col 66}     [95% Con{col 79}f. Interval]
+{hline 25}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 15}1.resting {c |}{col 26}{res}{space 2}     3.55{col 38}{space 2}     0.25{col 49}{space 1}   14.15{col 58}{space 3}0.000{col 66}{space 4}     3.06{col 79}{space 3}     4.04
+{txt}{space 10}consent_age_10 {c |}{col 26}{res}{space 2}    -2.09{col 38}{space 2}     0.06{col 49}{space 1}  -34.49{col 58}{space 3}0.000{col 66}{space 4}    -2.21{col 79}{space 3}    -1.97
+{txt}{space 21}sex {c |}{col 26}{res}{space 2}     4.44{col 38}{space 2}     0.16{col 49}{space 1}   27.28{col 58}{space 3}0.000{col 66}{space 4}     4.13{col 79}{space 3}     4.76
+{txt}{space 24} {c |}
+{space 16}new_race {c |}
+{space 22}2  {c |}{col 26}{res}{space 2}     2.92{col 38}{space 2}     0.53{col 49}{space 1}    5.51{col 58}{space 3}0.000{col 66}{space 4}     1.88{col 79}{space 3}     3.96
+{txt}{space 22}3  {c |}{col 26}{res}{space 2}     3.36{col 38}{space 2}     0.35{col 49}{space 1}    9.74{col 58}{space 3}0.000{col 66}{space 4}     2.69{col 79}{space 3}     4.04
+{txt}{space 22}4  {c |}{col 26}{res}{space 2}     1.98{col 38}{space 2}     0.49{col 49}{space 1}    4.01{col 58}{space 3}0.000{col 66}{space 4}     1.01{col 79}{space 3}     2.94
+{txt}{space 22}8  {c |}{col 26}{res}{space 2}     1.91{col 38}{space 2}     0.26{col 49}{space 1}    7.40{col 58}{space 3}0.000{col 66}{space 4}     1.40{col 79}{space 3}     2.41
+{txt}{space 22}9  {c |}{col 26}{res}{space 2}     1.58{col 38}{space 2}     0.50{col 49}{space 1}    3.14{col 58}{space 3}0.002{col 66}{space 4}     0.59{col 79}{space 3}     2.57
+{txt}{space 24} {c |}
+{space 16}diabetes {c |}{col 26}{res}{space 2}     4.31{col 38}{space 2}     0.35{col 49}{space 1}   12.49{col 58}{space 3}0.000{col 66}{space 4}     3.64{col 79}{space 3}     4.99
+{txt}{space 14}arrhythmia {c |}{col 26}{res}{space 2}     1.61{col 38}{space 2}     0.24{col 49}{space 1}    6.57{col 58}{space 3}0.000{col 66}{space 4}     1.13{col 79}{space 3}     2.09
+{txt}{space 13}sleep_apnea {c |}{col 26}{res}{space 2}     3.37{col 38}{space 2}     0.24{col 49}{space 1}   13.90{col 58}{space 3}0.000{col 66}{space 4}     2.90{col 79}{space 3}     3.85
+{txt}{space 20}copd {c |}{col 26}{res}{space 2}     2.35{col 38}{space 2}     0.48{col 49}{space 1}    4.85{col 58}{space 3}0.000{col 66}{space 4}     1.40{col 79}{space 3}     3.29
+{txt}{space 18}asthma {c |}{col 26}{res}{space 2}     1.69{col 38}{space 2}     0.27{col 49}{space 1}    6.29{col 58}{space 3}0.000{col 66}{space 4}     1.16{col 79}{space 3}     2.22
+{txt}{space 21}hbp {c |}{col 26}{res}{space 2}     1.70{col 38}{space 2}     0.20{col 49}{space 1}    8.52{col 58}{space 3}0.000{col 66}{space 4}     1.31{col 79}{space 3}     2.09
+{txt}{space 15}high_chol {c |}{col 26}{res}{space 2}     1.28{col 38}{space 2}     0.19{col 49}{space 1}    6.81{col 58}{space 3}0.000{col 66}{space 4}     0.91{col 79}{space 3}     1.65
+{txt}{space 21}pvd {c |}{col 26}{res}{space 2}     0.17{col 38}{space 2}     0.72{col 49}{space 1}    0.24{col 58}{space 3}0.810{col 66}{space 4}    -1.24{col 79}{space 3}     1.58
+{txt}{space 12}heart_attack {c |}{col 26}{res}{space 2}    -0.67{col 38}{space 2}     0.61{col 49}{space 1}   -1.11{col 58}{space 3}0.267{col 66}{space 4}    -1.86{col 79}{space 3}     0.52
+{txt}blockages_in_your_coro~y {c |}{col 26}{res}{space 2}    -0.50{col 38}{space 2}     0.43{col 49}{space 1}   -1.16{col 58}{space 3}0.247{col 66}{space 4}    -1.35{col 79}{space 3}     0.35
+{txt}{space 18}stroke {c |}{col 26}{res}{space 2}     1.04{col 38}{space 2}     0.53{col 49}{space 1}    1.97{col 58}{space 3}0.049{col 66}{space 4}     0.00{col 79}{space 3}     2.08
+{txt}{space 21}chf {c |}{col 26}{res}{space 2}     0.09{col 38}{space 2}     0.69{col 49}{space 1}    0.13{col 58}{space 3}0.894{col 66}{space 4}    -1.27{col 79}{space 3}     1.45
+{txt}{space 12}beta_agonist {c |}{col 26}{res}{space 2}     2.02{col 38}{space 2}     1.26{col 49}{space 1}    1.60{col 58}{space 3}0.109{col 66}{space 4}    -0.45{col 79}{space 3}     4.49
+{txt}{space 11}beta_blockers {c |}{col 26}{res}{space 2}    -0.24{col 38}{space 2}     0.31{col 49}{space 1}   -0.78{col 58}{space 3}0.438{col 66}{space 4}    -0.85{col 79}{space 3}     0.37
+{txt}{space 14}amiodarone {c |}{col 26}{res}{space 2}    -0.22{col 38}{space 2}     1.85{col 49}{space 1}   -0.12{col 58}{space 3}0.906{col 66}{space 4}    -3.84{col 79}{space 3}     3.40
+{txt}{space 19}_cons {c |}{col 26}{res}{space 2}    77.46{col 38}{space 2}     0.39{col 49}{space 1}  198.53{col 58}{space 3}0.000{col 66}{space 4}    76.69{col 79}{space 3}    78.22
+{txt}{hline 25}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}.                 
+.         regress geomean_bpm i.timecat [pw=wt_bpm], ///
+>                 vce(cluster user_id) cformat(%8.2f)                     
+{txt}(sum of wgt is 114,088.765032828)
+
+Linear regression                               Number of obs     = {res}   110,973
+                                                {txt}F(3, 31392)       =  {res}   452.69
+                                                {txt}Prob > F          = {res}    0.0000
+                                                {txt}R-squared         = {res}    0.0072
+                                                {txt}Root MSE          =    {res} 16.407
+
+{txt}{ralign 78:(Std. Err. adjusted for {res:31,393} clusters in user_id)}
+{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26}    Robust
+{col 1} geomean_bpm{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 5}timecat {c |}
+{space 3}12pm-6pm  {c |}{col 14}{res}{space 2}     2.94{col 26}{space 2}     0.11{col 37}{space 1}   26.15{col 46}{space 3}0.000{col 54}{space 4}     2.72{col 67}{space 3}     3.16
+{txt}{space 3}6am-12pm  {c |}{col 14}{res}{space 2}     2.93{col 26}{space 2}     0.10{col 37}{space 1}   28.05{col 46}{space 3}0.000{col 54}{space 4}     2.72{col 67}{space 3}     3.13
+{txt}{space 3}6pm-12am  {c |}{col 14}{res}{space 2}     0.25{col 26}{space 2}     0.11{col 37}{space 1}    2.35{col 46}{space 3}0.019{col 54}{space 4}     0.04{col 67}{space 3}     0.46
+{txt}{space 12} {c |}
+{space 7}_cons {c |}{col 14}{res}{space 2}    75.70{col 26}{space 2}     0.11{col 37}{space 1}  681.23{col 46}{space 3}0.000{col 54}{space 4}    75.48{col 67}{space 3}    75.92
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}.         
+.         regress geomean_bpm i.timecat ///
+>                 consent_age sex i.new_race ///
+>                 diabetes arrhythmia sleep_apnea copd asthma hbp ///
+>                 high_chol pvd heart_attack blockages stroke chf ///
+>                 beta_* amiodarone ///
+>                 [pw=wt_bpm], vce(cluster user_id) cformat(%8.2f) 
+{txt}(sum of wgt is 114,088.765032828)
+
+Linear regression                               Number of obs     = {res}   110,973
+                                                {txt}F(25, 31392)      =  {res}   183.09
+                                                {txt}Prob > F          = {res}    0.0000
+                                                {txt}R-squared         = {res}    0.0755
+                                                {txt}Root MSE          =    {res} 15.834
+
+{txt}{ralign 90:(Std. Err. adjusted for {res:31,393} clusters in user_id)}
+{hline 25}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 26}{c |}{col 38}    Robust
+{col 1}             geomean_bpm{col 26}{c |}      Coef.{col 38}   Std. Err.{col 50}      t{col 58}   P>|t|{col 66}     [95% Con{col 79}f. Interval]
+{hline 25}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 17}timecat {c |}
+{space 15}12pm-6pm  {c |}{col 26}{res}{space 2}     2.75{col 38}{space 2}     0.11{col 49}{space 1}   24.80{col 58}{space 3}0.000{col 66}{space 4}     2.54{col 79}{space 3}     2.97
+{txt}{space 15}6am-12pm  {c |}{col 26}{res}{space 2}     2.80{col 38}{space 2}     0.10{col 49}{space 1}   27.08{col 58}{space 3}0.000{col 66}{space 4}     2.60{col 79}{space 3}     3.01
+{txt}{space 15}6pm-12am  {c |}{col 26}{res}{space 2}    -0.10{col 38}{space 2}     0.11{col 49}{space 1}   -0.97{col 58}{space 3}0.333{col 66}{space 4}    -0.31{col 79}{space 3}     0.11
+{txt}{space 24} {c |}
+{space 10}consent_age_10 {c |}{col 26}{res}{space 2}    -2.08{col 38}{space 2}     0.06{col 49}{space 1}  -34.32{col 58}{space 3}0.000{col 66}{space 4}    -2.20{col 79}{space 3}    -1.96
+{txt}{space 21}sex {c |}{col 26}{res}{space 2}     4.41{col 38}{space 2}     0.16{col 49}{space 1}   27.02{col 58}{space 3}0.000{col 66}{space 4}     4.09{col 79}{space 3}     4.73
+{txt}{space 24} {c |}
+{space 16}new_race {c |}
+{space 22}2  {c |}{col 26}{res}{space 2}     3.06{col 38}{space 2}     0.53{col 49}{space 1}    5.81{col 58}{space 3}0.000{col 66}{space 4}     2.03{col 79}{space 3}     4.09
+{txt}{space 22}3  {c |}{col 26}{res}{space 2}     3.56{col 38}{space 2}     0.35{col 49}{space 1}   10.27{col 58}{space 3}0.000{col 66}{space 4}     2.88{col 79}{space 3}     4.24
+{txt}{space 22}4  {c |}{col 26}{res}{space 2}     2.06{col 38}{space 2}     0.50{col 49}{space 1}    4.14{col 58}{space 3}0.000{col 66}{space 4}     1.08{col 79}{space 3}     3.03
+{txt}{space 22}8  {c |}{col 26}{res}{space 2}     1.94{col 38}{space 2}     0.26{col 49}{space 1}    7.51{col 58}{space 3}0.000{col 66}{space 4}     1.43{col 79}{space 3}     2.44
+{txt}{space 22}9  {c |}{col 26}{res}{space 2}     1.63{col 38}{space 2}     0.50{col 49}{space 1}    3.24{col 58}{space 3}0.001{col 66}{space 4}     0.65{col 79}{space 3}     2.62
+{txt}{space 24} {c |}
+{space 16}diabetes {c |}{col 26}{res}{space 2}     4.32{col 38}{space 2}     0.35{col 49}{space 1}   12.51{col 58}{space 3}0.000{col 66}{space 4}     3.65{col 79}{space 3}     5.00
+{txt}{space 14}arrhythmia {c |}{col 26}{res}{space 2}     1.65{col 38}{space 2}     0.24{col 49}{space 1}    6.74{col 58}{space 3}0.000{col 66}{space 4}     1.17{col 79}{space 3}     2.13
+{txt}{space 13}sleep_apnea {c |}{col 26}{res}{space 2}     3.38{col 38}{space 2}     0.24{col 49}{space 1}   13.92{col 58}{space 3}0.000{col 66}{space 4}     2.90{col 79}{space 3}     3.85
+{txt}{space 20}copd {c |}{col 26}{res}{space 2}     2.37{col 38}{space 2}     0.48{col 49}{space 1}    4.88{col 58}{space 3}0.000{col 66}{space 4}     1.42{col 79}{space 3}     3.32
+{txt}{space 18}asthma {c |}{col 26}{res}{space 2}     1.69{col 38}{space 2}     0.27{col 49}{space 1}    6.27{col 58}{space 3}0.000{col 66}{space 4}     1.16{col 79}{space 3}     2.22
+{txt}{space 21}hbp {c |}{col 26}{res}{space 2}     1.71{col 38}{space 2}     0.20{col 49}{space 1}    8.60{col 58}{space 3}0.000{col 66}{space 4}     1.32{col 79}{space 3}     2.11
+{txt}{space 15}high_chol {c |}{col 26}{res}{space 2}     1.29{col 38}{space 2}     0.19{col 49}{space 1}    6.83{col 58}{space 3}0.000{col 66}{space 4}     0.92{col 79}{space 3}     1.66
+{txt}{space 21}pvd {c |}{col 26}{res}{space 2}     0.19{col 38}{space 2}     0.72{col 49}{space 1}    0.27{col 58}{space 3}0.788{col 66}{space 4}    -1.22{col 79}{space 3}     1.60
+{txt}{space 12}heart_attack {c |}{col 26}{res}{space 2}    -0.62{col 38}{space 2}     0.61{col 49}{space 1}   -1.02{col 58}{space 3}0.307{col 66}{space 4}    -1.81{col 79}{space 3}     0.57
+{txt}blockages_in_your_coro~y {c |}{col 26}{res}{space 2}    -0.52{col 38}{space 2}     0.43{col 49}{space 1}   -1.19{col 58}{space 3}0.234{col 66}{space 4}    -1.37{col 79}{space 3}     0.33
+{txt}{space 18}stroke {c |}{col 26}{res}{space 2}     1.07{col 38}{space 2}     0.53{col 49}{space 1}    2.01{col 58}{space 3}0.044{col 66}{space 4}     0.03{col 79}{space 3}     2.11
+{txt}{space 21}chf {c |}{col 26}{res}{space 2}     0.09{col 38}{space 2}     0.69{col 49}{space 1}    0.13{col 58}{space 3}0.894{col 66}{space 4}    -1.26{col 79}{space 3}     1.45
+{txt}{space 12}beta_agonist {c |}{col 26}{res}{space 2}     2.07{col 38}{space 2}     1.27{col 49}{space 1}    1.63{col 58}{space 3}0.102{col 66}{space 4}    -0.41{col 79}{space 3}     4.56
+{txt}{space 11}beta_blockers {c |}{col 26}{res}{space 2}    -0.21{col 38}{space 2}     0.31{col 49}{space 1}   -0.67{col 58}{space 3}0.501{col 66}{space 4}    -0.82{col 79}{space 3}     0.40
+{txt}{space 14}amiodarone {c |}{col 26}{res}{space 2}    -0.18{col 38}{space 2}     1.87{col 49}{space 1}   -0.10{col 58}{space 3}0.923{col 66}{space 4}    -3.85{col 79}{space 3}     3.48
+{txt}{space 19}_cons {c |}{col 26}{res}{space 2}    76.17{col 38}{space 2}     0.40{col 49}{space 1}  192.43{col 58}{space 3}0.000{col 66}{space 4}    75.40{col 79}{space 3}    76.95
+{txt}{hline 25}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}.                 
+.         regress geomean_bpm i.resting i.timecat [pw=wt_bpm], ///
+>                 vce(cluster user_id) cformat(%8.2f)
+{txt}(sum of wgt is 114,088.765032828)
+
+Linear regression                               Number of obs     = {res}   110,973
+                                                {txt}F(4, 31392)       =  {res}   370.57
+                                                {txt}Prob > F          = {res}    0.0000
+                                                {txt}R-squared         = {res}    0.0095
+                                                {txt}Root MSE          =    {res} 16.389
+
+{txt}{ralign 78:(Std. Err. adjusted for {res:31,393} clusters in user_id)}
+{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26}    Robust
+{col 1} geomean_bpm{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 3}1.resting {c |}{col 14}{res}{space 2}     3.26{col 26}{space 2}     0.26{col 37}{space 1}   12.55{col 46}{space 3}0.000{col 54}{space 4}     2.75{col 67}{space 3}     3.77
+{txt}{space 12} {c |}
+{space 5}timecat {c |}
+{space 3}12pm-6pm  {c |}{col 14}{res}{space 2}     2.87{col 26}{space 2}     0.11{col 37}{space 1}   25.61{col 46}{space 3}0.000{col 54}{space 4}     2.65{col 67}{space 3}     3.09
+{txt}{space 3}6am-12pm  {c |}{col 14}{res}{space 2}     2.87{col 26}{space 2}     0.10{col 37}{space 1}   27.53{col 46}{space 3}0.000{col 54}{space 4}     2.66{col 67}{space 3}     3.07
+{txt}{space 3}6pm-12am  {c |}{col 14}{res}{space 2}     0.22{col 26}{space 2}     0.11{col 37}{space 1}    2.07{col 46}{space 3}0.038{col 54}{space 4}     0.01{col 67}{space 3}     0.43
+{txt}{space 12} {c |}
+{space 7}_cons {c |}{col 14}{res}{space 2}    75.54{col 26}{space 2}     0.11{col 37}{space 1}  689.91{col 46}{space 3}0.000{col 54}{space 4}    75.33{col 67}{space 3}    75.75
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}.         
+.         regress geomean_bpm i.resting i.timecat ///
+>                 consent_age sex i.new_race ///
+>                 diabetes arrhythmia sleep_apnea copd asthma hbp ///
+>                 high_chol pvd heart_attack blockages stroke chf ///
+>                 beta_* amiodarone  ///
+>                 [pw=wt_bpm], vce(cluster user_id) cformat(%8.2f) 
+{txt}(sum of wgt is 114,088.765032828)
+
+Linear regression                               Number of obs     = {res}   110,973
+                                                {txt}F(26, 31392)      =  {res}   182.06
+                                                {txt}Prob > F          = {res}    0.0000
+                                                {txt}R-squared         = {res}    0.0779
+                                                {txt}Root MSE          =    {res} 15.814
+
+{txt}{ralign 90:(Std. Err. adjusted for {res:31,393} clusters in user_id)}
+{hline 25}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 26}{c |}{col 38}    Robust
+{col 1}             geomean_bpm{col 26}{c |}      Coef.{col 38}   Std. Err.{col 50}      t{col 58}   P>|t|{col 66}     [95% Con{col 79}f. Interval]
+{hline 25}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 15}1.resting {c |}{col 26}{res}{space 2}     3.37{col 38}{space 2}     0.25{col 49}{space 1}   13.45{col 58}{space 3}0.000{col 66}{space 4}     2.88{col 79}{space 3}     3.86
+{txt}{space 24} {c |}
+{space 17}timecat {c |}
+{space 15}12pm-6pm  {c |}{col 26}{res}{space 2}     2.68{col 38}{space 2}     0.11{col 49}{space 1}   24.23{col 58}{space 3}0.000{col 66}{space 4}     2.47{col 79}{space 3}     2.90
+{txt}{space 15}6am-12pm  {c |}{col 26}{res}{space 2}     2.74{col 38}{space 2}     0.10{col 49}{space 1}   26.55{col 58}{space 3}0.000{col 66}{space 4}     2.54{col 79}{space 3}     2.94
+{txt}{space 15}6pm-12am  {c |}{col 26}{res}{space 2}    -0.14{col 38}{space 2}     0.11{col 49}{space 1}   -1.27{col 58}{space 3}0.204{col 66}{space 4}    -0.34{col 79}{space 3}     0.07
+{txt}{space 24} {c |}
+{space 10}consent_age_10 {c |}{col 26}{res}{space 2}    -2.09{col 38}{space 2}     0.06{col 49}{space 1}  -34.55{col 58}{space 3}0.000{col 66}{space 4}    -2.21{col 79}{space 3}    -1.98
+{txt}{space 21}sex {c |}{col 26}{res}{space 2}     4.43{col 38}{space 2}     0.16{col 49}{space 1}   27.19{col 58}{space 3}0.000{col 66}{space 4}     4.11{col 79}{space 3}     4.75
+{txt}{space 24} {c |}
+{space 16}new_race {c |}
+{space 22}2  {c |}{col 26}{res}{space 2}     2.93{col 38}{space 2}     0.53{col 49}{space 1}    5.54{col 58}{space 3}0.000{col 66}{space 4}     1.90{col 79}{space 3}     3.97
+{txt}{space 22}3  {c |}{col 26}{res}{space 2}     3.49{col 38}{space 2}     0.35{col 49}{space 1}   10.11{col 58}{space 3}0.000{col 66}{space 4}     2.82{col 79}{space 3}     4.17
+{txt}{space 22}4  {c |}{col 26}{res}{space 2}     2.03{col 38}{space 2}     0.49{col 49}{space 1}    4.10{col 58}{space 3}0.000{col 66}{space 4}     1.06{col 79}{space 3}     2.99
+{txt}{space 22}8  {c |}{col 26}{res}{space 2}     1.91{col 38}{space 2}     0.26{col 49}{space 1}    7.42{col 58}{space 3}0.000{col 66}{space 4}     1.41{col 79}{space 3}     2.42
+{txt}{space 22}9  {c |}{col 26}{res}{space 2}     1.62{col 38}{space 2}     0.50{col 49}{space 1}    3.21{col 58}{space 3}0.001{col 66}{space 4}     0.63{col 79}{space 3}     2.61
+{txt}{space 24} {c |}
+{space 16}diabetes {c |}{col 26}{res}{space 2}     4.31{col 38}{space 2}     0.35{col 49}{space 1}   12.48{col 58}{space 3}0.000{col 66}{space 4}     3.63{col 79}{space 3}     4.99
+{txt}{space 14}arrhythmia {c |}{col 26}{res}{space 2}     1.63{col 38}{space 2}     0.24{col 49}{space 1}    6.65{col 58}{space 3}0.000{col 66}{space 4}     1.15{col 79}{space 3}     2.11
+{txt}{space 13}sleep_apnea {c |}{col 26}{res}{space 2}     3.36{col 38}{space 2}     0.24{col 49}{space 1}   13.89{col 58}{space 3}0.000{col 66}{space 4}     2.89{col 79}{space 3}     3.84
+{txt}{space 20}copd {c |}{col 26}{res}{space 2}     2.35{col 38}{space 2}     0.48{col 49}{space 1}    4.86{col 58}{space 3}0.000{col 66}{space 4}     1.40{col 79}{space 3}     3.29
+{txt}{space 18}asthma {c |}{col 26}{res}{space 2}     1.69{col 38}{space 2}     0.27{col 49}{space 1}    6.31{col 58}{space 3}0.000{col 66}{space 4}     1.17{col 79}{space 3}     2.22
+{txt}{space 21}hbp {c |}{col 26}{res}{space 2}     1.70{col 38}{space 2}     0.20{col 49}{space 1}    8.54{col 58}{space 3}0.000{col 66}{space 4}     1.31{col 79}{space 3}     2.09
+{txt}{space 15}high_chol {c |}{col 26}{res}{space 2}     1.28{col 38}{space 2}     0.19{col 49}{space 1}    6.79{col 58}{space 3}0.000{col 66}{space 4}     0.91{col 79}{space 3}     1.65
+{txt}{space 21}pvd {c |}{col 26}{res}{space 2}     0.15{col 38}{space 2}     0.72{col 49}{space 1}    0.21{col 58}{space 3}0.831{col 66}{space 4}    -1.26{col 79}{space 3}     1.56
+{txt}{space 12}heart_attack {c |}{col 26}{res}{space 2}    -0.68{col 38}{space 2}     0.61{col 49}{space 1}   -1.13{col 58}{space 3}0.260{col 66}{space 4}    -1.87{col 79}{space 3}     0.51
+{txt}blockages_in_your_coro~y {c |}{col 26}{res}{space 2}    -0.51{col 38}{space 2}     0.43{col 49}{space 1}   -1.18{col 58}{space 3}0.240{col 66}{space 4}    -1.36{col 79}{space 3}     0.34
+{txt}{space 18}stroke {c |}{col 26}{res}{space 2}     1.04{col 38}{space 2}     0.53{col 49}{space 1}    1.97{col 58}{space 3}0.048{col 66}{space 4}     0.01{col 79}{space 3}     2.08
+{txt}{space 21}chf {c |}{col 26}{res}{space 2}     0.11{col 38}{space 2}     0.69{col 49}{space 1}    0.16{col 58}{space 3}0.870{col 66}{space 4}    -1.25{col 79}{space 3}     1.47
+{txt}{space 12}beta_agonist {c |}{col 26}{res}{space 2}     2.01{col 38}{space 2}     1.26{col 49}{space 1}    1.60{col 58}{space 3}0.110{col 66}{space 4}    -0.45{col 79}{space 3}     4.47
+{txt}{space 11}beta_blockers {c |}{col 26}{res}{space 2}    -0.25{col 38}{space 2}     0.31{col 49}{space 1}   -0.79{col 58}{space 3}0.428{col 66}{space 4}    -0.86{col 79}{space 3}     0.36
+{txt}{space 14}amiodarone {c |}{col 26}{res}{space 2}    -0.19{col 38}{space 2}     1.85{col 49}{space 1}   -0.10{col 58}{space 3}0.919{col 66}{space 4}    -3.81{col 79}{space 3}     3.43
+{txt}{space 19}_cons {c |}{col 26}{res}{space 2}    76.06{col 38}{space 2}     0.39{col 49}{space 1}  192.62{col 58}{space 3}0.000{col 66}{space 4}    75.29{col 79}{space 3}    76.83
+{txt}{hline 25}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. 
+. log close
+      {txt}name:  {res}<unnamed>
+       {txt}log:  {res}/Users/eric/Work/Parnassus/Olgin/Avram/HEH Heart Rate/Programs/time and resting effects.smcl
+  {txt}log type:  {res}smcl
+ {txt}closed on:  {res}19 Apr 2019, 15:34:34
+{txt}{.-}
+{smcl}
+{txt}{sf}{ul off}

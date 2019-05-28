@@ -1,0 +1,529 @@
+{smcl}
+{com}{sf}{ul off}{txt}{.-}
+      name:  {res}<unnamed>
+       {txt}log:  {res}/Users/eric/Work/Parnassus/Olgin/Avram/HEH Heart Rate/Programs/regression models.smcl
+  {txt}log type:  {res}smcl
+ {txt}opened on:  {res}19 Apr 2019, 12:28:36
+{txt}
+{com}. 
+.         qui import delimited using ///
+>                 "$boxdata/multivariable_model_1.csv", ///
+>                 clear varnames(1) delim(",") 
+{txt}
+{com}.         qui gen consent_age_10 = age/10
+{txt}
+{com}.         regress geomean_bpm consent_age_10 i.sex i.new_race disease_sum ///
+>                 mean_steps24h_1000 bmi [pw=wt_bpm], cformat(%8.2f)
+{txt}(sum of wgt is 5,050.35956951976)
+
+Linear regression                               Number of obs     = {res}     4,868
+                                                {txt}F(10, 4857)       =  {res}    48.78
+                                                {txt}Prob > F          = {res}    0.0000
+                                                {txt}R-squared         = {res}    0.0909
+                                                {txt}Root MSE          =    {res} 13.959
+
+{txt}{hline 19}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 20}{c |}{col 32}    Robust
+{col 1}       geomean_bpm{col 20}{c |}      Coef.{col 32}   Std. Err.{col 44}      t{col 52}   P>|t|{col 60}     [95% Con{col 73}f. Interval]
+{hline 19}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 4}consent_age_10 {c |}{col 20}{res}{space 2}    -2.32{col 32}{space 2}     0.15{col 43}{space 1}  -15.21{col 52}{space 3}0.000{col 60}{space 4}    -2.62{col 73}{space 3}    -2.02
+{txt}{space 13}2.sex {c |}{col 20}{res}{space 2}     3.96{col 32}{space 2}     0.42{col 43}{space 1}    9.53{col 52}{space 3}0.000{col 60}{space 4}     3.14{col 73}{space 3}     4.77
+{txt}{space 18} {c |}
+{space 10}new_race {c |}
+{space 16}2  {c |}{col 20}{res}{space 2}     0.65{col 32}{space 2}     1.56{col 43}{space 1}    0.42{col 52}{space 3}0.678{col 60}{space 4}    -2.41{col 73}{space 3}     3.71
+{txt}{space 16}3  {c |}{col 20}{res}{space 2}     4.59{col 32}{space 2}     1.05{col 43}{space 1}    4.35{col 52}{space 3}0.000{col 60}{space 4}     2.52{col 73}{space 3}     6.65
+{txt}{space 16}4  {c |}{col 20}{res}{space 2}    -0.63{col 32}{space 2}     1.96{col 43}{space 1}   -0.32{col 52}{space 3}0.748{col 60}{space 4}    -4.47{col 73}{space 3}     3.21
+{txt}{space 16}8  {c |}{col 20}{res}{space 2}     0.26{col 32}{space 2}     0.73{col 43}{space 1}    0.36{col 52}{space 3}0.720{col 60}{space 4}    -1.17{col 73}{space 3}     1.70
+{txt}{space 16}9  {c |}{col 20}{res}{space 2}     0.45{col 32}{space 2}     1.35{col 43}{space 1}    0.33{col 52}{space 3}0.738{col 60}{space 4}    -2.19{col 73}{space 3}     3.09
+{txt}{space 18} {c |}
+{space 7}disease_sum {c |}{col 20}{res}{space 2}     1.31{col 32}{space 2}     0.17{col 43}{space 1}    7.87{col 52}{space 3}0.000{col 60}{space 4}     0.99{col 73}{space 3}     1.64
+{txt}mean_steps24h_1000 {c |}{col 20}{res}{space 2}     0.19{col 32}{space 2}     0.08{col 43}{space 1}    2.46{col 52}{space 3}0.014{col 60}{space 4}     0.04{col 73}{space 3}     0.35
+{txt}{space 15}bmi {c |}{col 20}{res}{space 2}     0.25{col 32}{space 2}     0.03{col 43}{space 1}    7.06{col 52}{space 3}0.000{col 60}{space 4}     0.18{col 73}{space 3}     0.32
+{txt}{space 13}_cons {c |}{col 20}{res}{space 2}    77.18{col 32}{space 2}     1.31{col 43}{space 1}   59.13{col 52}{space 3}0.000{col 60}{space 4}    74.62{col 73}{space 3}    79.74
+{txt}{hline 19}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}.                 
+.         * collinearity check
+.         estat vif
+
+{txt}    Variable {c |}       VIF       1/VIF  
+{hline 13}{c +}{hline 22}
+consent_a~10 {c |} {res}     1.22    0.822769
+{txt}{space 7}2.sex {c |} {res}     1.06    0.947436
+{txt}{space 4}new_race {c |}
+{space 10}2  {c |} {res}     1.01    0.987817
+{txt}{space 10}3  {c |} {res}     1.03    0.972751
+{txt}{space 10}4  {c |} {res}     1.01    0.990866
+{txt}{space 10}8  {c |} {res}     1.02    0.976693
+{txt}{space 10}9  {c |} {res}     1.01    0.985706
+{txt}{space 1}disease_sum {c |} {res}     1.25    0.801255
+{txt}mean_st~1000 {c |} {res}     1.02    0.980043
+{txt}{space 9}bmi {c |} {res}     1.11    0.900771
+{txt}{hline 13}{c +}{hline 22}
+    Mean VIF {c |} {res}     1.07
+{txt}
+{com}.         
+.         * checks for heterosckedasticity
+.         qui predict fitted
+{txt}
+{com}.         qui predict resid, resid
+{txt}
+{com}.         foreach x in sex new_race {c -(}
+{txt}  2{com}.                 tabstat resid, by(`x') s(n var) format(%8.3g)
+{txt}  3{com}.                 {c )-}               
+
+{txt}Summary for variables: resid
+{col 6}by categories of: sex 
+
+{ralign 8:sex} {...}
+{c |}         N  variance
+{hline 9}{c +}{hline 20}
+{ralign 8:1} {...}
+{c |}{...}
+  {res}    2733       206
+{txt}{ralign 8:2} {...}
+{c |}{...}
+  {res}    2135       201
+{txt}{hline 9}{c +}{hline 20}
+{ralign 8:Total} {...}
+{c |}{...}
+  {res}    4868       204
+{txt}{hline 9}{c BT}{hline 20}
+
+Summary for variables: resid
+{col 6}by categories of: new_race 
+
+{ralign 8:new_race} {...}
+{c |}         N  variance
+{hline 9}{c +}{hline 20}
+{ralign 8:1} {...}
+{c |}{...}
+  {res}    4037       205
+{txt}{ralign 8:2} {...}
+{c |}{...}
+  {res}      77       201
+{txt}{ralign 8:3} {...}
+{c |}{...}
+  {res}     202       214
+{txt}{ralign 8:4} {...}
+{c |}{...}
+  {res}      51       176
+{txt}{ralign 8:8} {...}
+{c |}{...}
+  {res}     369       173
+{txt}{ralign 8:9} {...}
+{c |}{...}
+  {res}     132       243
+{txt}{hline 9}{c +}{hline 20}
+{ralign 8:Total} {...}
+{c |}{...}
+  {res}    4868       204
+{txt}{hline 9}{c BT}{hline 20}
+
+{com}.         twoway (scatter resid fitted, sort msymbol(point) msize(vtiny)), ///
+>                 plotregion(style(none)) yline(0) ytitle("") ///
+>                 title("Residuals Versus Fitted") ///
+>                 legend(off) name(rvf1, replace)
+{res}{txt}
+{com}.         graph export rvf1.pdf, replace
+{txt}(file /Users/eric/Work/Parnassus/Olgin/Avram/HEH Heart Rate/Programs/rvf1.pdf written in PDF format)
+
+{com}.         foreach x in consent_age_10 disease_sum mean_steps24h_1000 bmi {c -(}
+{txt}  2{com}.                 twoway (scatter resid `x', sort msymbol(point) msize(vtiny)), ///
+>                         plotregion(style(none)) yline(0) ytitle("") ///
+>                         title("Residuals Versus Predictor") ///
+>                         legend(off) name(rvp_`x'1, replace)
+{txt}  3{com}.                 graph export rvp_`x'1.pdf, replace
+{txt}  4{com}.                 {c )-}
+{res}{txt}(file /Users/eric/Work/Parnassus/Olgin/Avram/HEH Heart Rate/Programs/rvp_consent_age_101.pdf written in PDF format)
+{res}{txt}(file /Users/eric/Work/Parnassus/Olgin/Avram/HEH Heart Rate/Programs/rvp_disease_sum1.pdf written in PDF format)
+{res}{txt}(file /Users/eric/Work/Parnassus/Olgin/Avram/HEH Heart Rate/Programs/rvp_mean_steps24h_10001.pdf written in PDF format)
+{res}{txt}(file /Users/eric/Work/Parnassus/Olgin/Avram/HEH Heart Rate/Programs/rvp_bmi1.pdf written in PDF format)
+
+{com}.                 
+.         qui import delimited using "$boxdata/multivariable_model_2.csv", ///
+>                 clear varnames(1) delim(",")  
+{txt}
+{com}.         qui gen consent_age_10 = age/10
+{txt}
+{com}.         regress geomean_bpm consent_age_10 i.sex i.new_race ///
+>                 diabetes arrhythmia sleep_apnea ccb copd asthma hbp high_chol ///
+>                 beta_agonist beta_blocker amiodarone pvd heart_attack blockages ///
+>                 stroke chf [pw=wt_bpm], cformat(%8.2f)
+{txt}(sum of wgt is 32,839.5450233221)
+
+Linear regression                               Number of obs     = {res}    31,781
+                                                {txt}F(23, 31757)      =  {res}   140.17
+                                                {txt}Prob > F          = {res}    0.0000
+                                                {txt}R-squared         = {res}    0.0885
+                                                {txt}Root MSE          =    {res} 13.459
+
+{txt}{hline 25}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 26}{c |}{col 38}    Robust
+{col 1}             geomean_bpm{col 26}{c |}      Coef.{col 38}   Std. Err.{col 50}      t{col 58}   P>|t|{col 66}     [95% Con{col 79}f. Interval]
+{hline 25}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 10}consent_age_10 {c |}{col 26}{res}{space 2}    -1.98{col 38}{space 2}     0.06{col 49}{space 1}  -33.79{col 58}{space 3}0.000{col 66}{space 4}    -2.09{col 79}{space 3}    -1.86
+{txt}{space 19}2.sex {c |}{col 26}{res}{space 2}     4.31{col 38}{space 2}     0.16{col 49}{space 1}   27.51{col 58}{space 3}0.000{col 66}{space 4}     4.01{col 79}{space 3}     4.62
+{txt}{space 24} {c |}
+{space 16}new_race {c |}
+{space 22}2  {c |}{col 26}{res}{space 2}     2.97{col 38}{space 2}     0.50{col 49}{space 1}    5.97{col 58}{space 3}0.000{col 66}{space 4}     1.99{col 79}{space 3}     3.94
+{txt}{space 22}3  {c |}{col 26}{res}{space 2}     3.38{col 38}{space 2}     0.33{col 49}{space 1}   10.15{col 58}{space 3}0.000{col 66}{space 4}     2.72{col 79}{space 3}     4.03
+{txt}{space 22}4  {c |}{col 26}{res}{space 2}     1.87{col 38}{space 2}     0.47{col 49}{space 1}    4.02{col 58}{space 3}0.000{col 66}{space 4}     0.96{col 79}{space 3}     2.79
+{txt}{space 22}8  {c |}{col 26}{res}{space 2}     1.85{col 38}{space 2}     0.25{col 49}{space 1}    7.46{col 58}{space 3}0.000{col 66}{space 4}     1.36{col 79}{space 3}     2.34
+{txt}{space 22}9  {c |}{col 26}{res}{space 2}     1.22{col 38}{space 2}     0.48{col 49}{space 1}    2.56{col 58}{space 3}0.011{col 66}{space 4}     0.29{col 79}{space 3}     2.16
+{txt}{space 24} {c |}
+{space 16}diabetes {c |}{col 26}{res}{space 2}     4.30{col 38}{space 2}     0.34{col 49}{space 1}   12.72{col 58}{space 3}0.000{col 66}{space 4}     3.64{col 79}{space 3}     4.96
+{txt}{space 14}arrhythmia {c |}{col 26}{res}{space 2}     1.60{col 38}{space 2}     0.24{col 49}{space 1}    6.77{col 58}{space 3}0.000{col 66}{space 4}     1.14{col 79}{space 3}     2.06
+{txt}{space 13}sleep_apnea {c |}{col 26}{res}{space 2}     3.67{col 38}{space 2}     0.24{col 49}{space 1}   15.60{col 58}{space 3}0.000{col 66}{space 4}     3.21{col 79}{space 3}     4.13
+{txt}{space 21}ccb {c |}{col 26}{res}{space 2}     3.78{col 38}{space 2}     0.88{col 49}{space 1}    4.31{col 58}{space 3}0.000{col 66}{space 4}     2.06{col 79}{space 3}     5.49
+{txt}{space 20}copd {c |}{col 26}{res}{space 2}     2.46{col 38}{space 2}     0.48{col 49}{space 1}    5.16{col 58}{space 3}0.000{col 66}{space 4}     1.52{col 79}{space 3}     3.39
+{txt}{space 18}asthma {c |}{col 26}{res}{space 2}     1.50{col 38}{space 2}     0.26{col 49}{space 1}    5.78{col 58}{space 3}0.000{col 66}{space 4}     0.99{col 79}{space 3}     2.01
+{txt}{space 21}hbp {c |}{col 26}{res}{space 2}     1.81{col 38}{space 2}     0.19{col 49}{space 1}    9.37{col 58}{space 3}0.000{col 66}{space 4}     1.43{col 79}{space 3}     2.19
+{txt}{space 15}high_chol {c |}{col 26}{res}{space 2}     1.30{col 38}{space 2}     0.18{col 49}{space 1}    7.13{col 58}{space 3}0.000{col 66}{space 4}     0.94{col 79}{space 3}     1.66
+{txt}{space 12}beta_agonist {c |}{col 26}{res}{space 2}     2.85{col 38}{space 2}     1.25{col 49}{space 1}    2.28{col 58}{space 3}0.023{col 66}{space 4}     0.40{col 79}{space 3}     5.30
+{txt}{space 11}beta_blockers {c |}{col 26}{res}{space 2}    -0.39{col 38}{space 2}     0.29{col 49}{space 1}   -1.34{col 58}{space 3}0.181{col 66}{space 4}    -0.97{col 79}{space 3}     0.18
+{txt}{space 14}amiodarone {c |}{col 26}{res}{space 2}    -2.08{col 38}{space 2}     1.65{col 49}{space 1}   -1.26{col 58}{space 3}0.208{col 66}{space 4}    -5.31{col 79}{space 3}     1.16
+{txt}{space 21}pvd {c |}{col 26}{res}{space 2}     0.27{col 38}{space 2}     0.70{col 49}{space 1}    0.38{col 58}{space 3}0.704{col 66}{space 4}    -1.11{col 79}{space 3}     1.64
+{txt}{space 12}heart_attack {c |}{col 26}{res}{space 2}    -0.42{col 38}{space 2}     0.59{col 49}{space 1}   -0.71{col 58}{space 3}0.480{col 66}{space 4}    -1.57{col 79}{space 3}     0.74
+{txt}blockages_in_your_coro~y {c |}{col 26}{res}{space 2}    -0.23{col 38}{space 2}     0.41{col 49}{space 1}   -0.56{col 58}{space 3}0.579{col 66}{space 4}    -1.03{col 79}{space 3}     0.57
+{txt}{space 18}stroke {c |}{col 26}{res}{space 2}     0.91{col 38}{space 2}     0.51{col 49}{space 1}    1.80{col 58}{space 3}0.072{col 66}{space 4}    -0.08{col 79}{space 3}     1.91
+{txt}{space 21}chf {c |}{col 26}{res}{space 2}     0.39{col 38}{space 2}     0.66{col 49}{space 1}    0.59{col 58}{space 3}0.553{col 66}{space 4}    -0.90{col 79}{space 3}     1.69
+{txt}{space 19}_cons {c |}{col 26}{res}{space 2}    81.69{col 38}{space 2}     0.30{col 49}{space 1}  275.63{col 58}{space 3}0.000{col 66}{space 4}    81.11{col 79}{space 3}    82.27
+{txt}{hline 25}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}.                 
+.         * collinearity checks
+.         estat vif
+
+{txt}    Variable {c |}       VIF       1/VIF  
+{hline 13}{c +}{hline 22}
+consent_a~10 {c |} {res}     1.28    0.781178
+{txt}{space 7}2.sex {c |} {res}     1.07    0.932389
+{txt}{space 4}new_race {c |}
+{space 10}2  {c |} {res}     1.01    0.988259
+{txt}{space 10}3  {c |} {res}     1.04    0.960188
+{txt}{space 10}4  {c |} {res}     1.01    0.986987
+{txt}{space 10}8  {c |} {res}     1.04    0.965141
+{txt}{space 10}9  {c |} {res}     1.02    0.983624
+{txt}{space 4}diabetes {c |} {res}     1.09    0.913365
+{txt}{space 2}arrhythmia {c |} {res}     1.07    0.931712
+{txt}{space 1}sleep_apnea {c |} {res}     1.10    0.909895
+{txt}{space 9}ccb {c |} {res}     1.01    0.986839
+{txt}{space 8}copd {c |} {res}     1.05    0.948731
+{txt}{space 6}asthma {c |} {res}     1.05    0.951805
+{txt}{space 9}hbp {c |} {res}     1.26    0.794174
+{txt}{space 3}high_chol {c |} {res}     1.21    0.825150
+{txt}beta_agonist {c |} {res}     1.01    0.993861
+{txt}beta_block~s {c |} {res}     1.16    0.865567
+{txt}{space 2}amiodarone {c |} {res}     1.02    0.982478
+{txt}{space 9}pvd {c |} {res}     1.08    0.922518
+{txt}heart_attack {c |} {res}     1.41    0.708414
+{txt}blockages_~y {c |} {res}     1.49    0.668959
+{txt}{space 6}stroke {c |} {res}     1.04    0.959937
+{txt}{space 9}chf {c |} {res}     1.10    0.907487
+{txt}{hline 13}{c +}{hline 22}
+    Mean VIF {c |} {res}     1.11
+{txt}
+{com}.         
+.         * checks for heterosckedasticity
+.         qui predict fitted
+{txt}
+{com}.         qui predict resid, resid
+{txt}
+{com}.         foreach x in sex new_race ///
+>                 diabetes arrhythmia sleep_apnea ccb copd asthma hbp high_chol ///
+>                 beta_agonist beta_blocker amiodarone pvd heart_attack blockages ///
+>                 stroke chf {c -(}
+{txt}  2{com}.                 tabstat resid, by(`x') s(n var) format(%8.3g) nototal
+{txt}  3{com}.                 {c )-}               
+
+{txt}Summary for variables: resid
+{col 6}by categories of: sex 
+
+{ralign 8:sex} {...}
+{c |}         N  variance
+{hline 9}{c +}{hline 20}
+{ralign 8:1} {...}
+{c |}{...}
+  {res}   17112       189
+{txt}{ralign 8:2} {...}
+{c |}{...}
+  {res}   14669       179
+{txt}{hline 9}{c BT}{hline 20}
+
+Summary for variables: resid
+{col 6}by categories of: new_race 
+
+{ralign 8:new_race} {...}
+{c |}         N  variance
+{hline 9}{c +}{hline 20}
+{ralign 8:1} {...}
+{c |}{...}
+  {res}   24175       186
+{txt}{ralign 8:2} {...}
+{c |}{...}
+  {res}     665       158
+{txt}{ralign 8:3} {...}
+{c |}{...}
+  {res}    1891       185
+{txt}{ralign 8:4} {...}
+{c |}{...}
+  {res}     722       150
+{txt}{ralign 8:8} {...}
+{c |}{...}
+  {res}    3463       186
+{txt}{ralign 8:9} {...}
+{c |}{...}
+  {res}     865       190
+{txt}{hline 9}{c BT}{hline 20}
+
+Summary for variables: resid
+{col 6}by categories of: diabetes 
+
+{ralign 8:diabetes} {...}
+{c |}         N  variance
+{hline 9}{c +}{hline 20}
+{ralign 8:0} {...}
+{c |}{...}
+  {res}   30104       185
+{txt}{ralign 8:1} {...}
+{c |}{...}
+  {res}    1677       180
+{txt}{hline 9}{c BT}{hline 20}
+
+Summary for variables: resid
+{col 6}by categories of: arrhythmia 
+
+{ralign 10:arrhythmia} {...}
+{c |}         N  variance
+{hline 11}{c +}{hline 20}
+{ralign 10:0} {...}
+{c |}{...}
+  {res}   27519       182
+{txt}{ralign 10:1} {...}
+{c |}{...}
+  {res}    4262       199
+{txt}{hline 11}{c BT}{hline 20}
+
+Summary for variables: resid
+{col 6}by categories of: sleep_apnea 
+
+{ralign 11:sleep_apnea} {...}
+{c |}         N  variance
+{hline 12}{c +}{hline 20}
+{ralign 11:0} {...}
+{c |}{...}
+  {res}   27990       185
+{txt}{ralign 11:1} {...}
+{c |}{...}
+  {res}    3791       178
+{txt}{hline 12}{c BT}{hline 20}
+
+Summary for variables: resid
+{col 6}by categories of: ccb 
+
+{ralign 8:ccb} {...}
+{c |}         N  variance
+{hline 9}{c +}{hline 20}
+{ralign 8:0} {...}
+{c |}{...}
+  {res}   31544       185
+{txt}{ralign 8:1} {...}
+{c |}{...}
+  {res}     237       189
+{txt}{hline 9}{c BT}{hline 20}
+
+Summary for variables: resid
+{col 6}by categories of: copd 
+
+{ralign 8:copd} {...}
+{c |}         N  variance
+{hline 9}{c +}{hline 20}
+{ralign 8:0} {...}
+{c |}{...}
+  {res}   30990       185
+{txt}{ralign 8:1} {...}
+{c |}{...}
+  {res}     791       185
+{txt}{hline 9}{c BT}{hline 20}
+
+Summary for variables: resid
+{col 6}by categories of: asthma 
+
+{ralign 8:asthma} {...}
+{c |}         N  variance
+{hline 9}{c +}{hline 20}
+{ralign 8:0} {...}
+{c |}{...}
+  {res}   28672       184
+{txt}{ralign 8:1} {...}
+{c |}{...}
+  {res}    3109       190
+{txt}{hline 9}{c BT}{hline 20}
+
+Summary for variables: resid
+{col 6}by categories of: hbp 
+
+{ralign 8:hbp} {...}
+{c |}         N  variance
+{hline 9}{c +}{hline 20}
+{ralign 8:0} {...}
+{c |}{...}
+  {res}   24198       190
+{txt}{ralign 8:1} {...}
+{c |}{...}
+  {res}    7583       168
+{txt}{hline 9}{c BT}{hline 20}
+
+Summary for variables: resid
+{col 6}by categories of: high_chol 
+
+{ralign 9:high_chol} {...}
+{c |}         N  variance
+{hline 10}{c +}{hline 20}
+{ralign 9:0} {...}
+{c |}{...}
+  {res}   23047       188
+{txt}{ralign 9:1} {...}
+{c |}{...}
+  {res}    8734       175
+{txt}{hline 10}{c BT}{hline 20}
+
+Summary for variables: resid
+{col 6}by categories of: beta_agonist 
+
+{ralign 12:beta_agonist} {...}
+{c |}         N  variance
+{hline 13}{c +}{hline 20}
+{ralign 12:0} {...}
+{c |}{...}
+  {res}   31678       185
+{txt}{ralign 12:1} {...}
+{c |}{...}
+  {res}     103       176
+{txt}{hline 13}{c BT}{hline 20}
+
+Summary for variables: resid
+{col 6}by categories of: beta_blockers 
+
+{ralign 13:beta_blockers} {...}
+{c |}         N  variance
+{hline 14}{c +}{hline 20}
+{ralign 13:0} {...}
+{c |}{...}
+  {res}   29566       187
+{txt}{ralign 13:1} {...}
+{c |}{...}
+  {res}    2215       151
+{txt}{hline 14}{c BT}{hline 20}
+
+Summary for variables: resid
+{col 6}by categories of: amiodarone 
+
+{ralign 10:amiodarone} {...}
+{c |}         N  variance
+{hline 11}{c +}{hline 20}
+{ralign 10:0} {...}
+{c |}{...}
+  {res}   31730       185
+{txt}{ralign 10:1} {...}
+{c |}{...}
+  {res}      51       142
+{txt}{hline 11}{c BT}{hline 20}
+
+Summary for variables: resid
+{col 6}by categories of: pvd 
+
+{ralign 8:pvd} {...}
+{c |}         N  variance
+{hline 9}{c +}{hline 20}
+{ralign 8:0} {...}
+{c |}{...}
+  {res}   31415       185
+{txt}{ralign 8:1} {...}
+{c |}{...}
+  {res}     366       170
+{txt}{hline 9}{c BT}{hline 20}
+
+Summary for variables: resid
+{col 6}by categories of: heart_attack 
+
+{ralign 12:heart_attack} {...}
+{c |}         N  variance
+{hline 13}{c +}{hline 20}
+{ralign 12:0} {...}
+{c |}{...}
+  {res}   31026       184
+{txt}{ralign 12:1} {...}
+{c |}{...}
+  {res}     755       204
+{txt}{hline 13}{c BT}{hline 20}
+
+Summary for variables: resid
+{col 6}by categories of: blockages_in_your_coronary 
+
+{ralign 26:blockages_in_your_coronary} {...}
+{c |}         N  variance
+{hline 27}{c +}{hline 20}
+{ralign 26:0} {...}
+{c |}{...}
+  {res}   30144       185
+{txt}{ralign 26:1} {...}
+{c |}{...}
+  {res}    1637       184
+{txt}{hline 27}{c BT}{hline 20}
+
+Summary for variables: resid
+{col 6}by categories of: stroke 
+
+{ralign 8:stroke} {...}
+{c |}         N  variance
+{hline 9}{c +}{hline 20}
+{ralign 8:0} {...}
+{c |}{...}
+  {res}   31106       185
+{txt}{ralign 8:1} {...}
+{c |}{...}
+  {res}     675       166
+{txt}{hline 9}{c BT}{hline 20}
+
+Summary for variables: resid
+{col 6}by categories of: chf 
+
+{ralign 8:chf} {...}
+{c |}         N  variance
+{hline 9}{c +}{hline 20}
+{ralign 8:0} {...}
+{c |}{...}
+  {res}   31370       185
+{txt}{ralign 8:1} {...}
+{c |}{...}
+  {res}     411       161
+{txt}{hline 9}{c BT}{hline 20}
+
+{com}.         twoway (scatter resid fitted, sort msymbol(point) msize(vtiny)), ///
+>                 plotregion(style(none)) yline(0) ytitle("") ///
+>                 title("Residuals Versus Fitted") ///
+>                 legend(off) name(rvf2, replace)
+{res}{txt}
+{com}.         graph export rvf2.pdf, replace
+{txt}(file /Users/eric/Work/Parnassus/Olgin/Avram/HEH Heart Rate/Programs/rvf2.pdf written in PDF format)
+
+{com}.         foreach x in consent_age_10 {c -(}
+{txt}  2{com}.                 twoway (scatter resid `x', sort msymbol(point) msize(vtiny)), ///
+>                         plotregion(style(none)) yline(0) ytitle("") ///
+>                         title("Residuals Versus Predictor") ///
+>                         legend(off) name(rvp_`x'2, replace)
+{txt}  3{com}.                 graph export rvp_`x'2.pdf, replace
+{txt}  4{com}.                 {c )-}
+{res}{txt}(file /Users/eric/Work/Parnassus/Olgin/Avram/HEH Heart Rate/Programs/rvp_consent_age_102.pdf written in PDF format)
+
+{com}. 
+. log close
+      {txt}name:  {res}<unnamed>
+       {txt}log:  {res}/Users/eric/Work/Parnassus/Olgin/Avram/HEH Heart Rate/Programs/regression models.smcl
+  {txt}log type:  {res}smcl
+ {txt}closed on:  {res}19 Apr 2019, 12:28:46
+{txt}{.-}
+{smcl}
+{txt}{sf}{ul off}
