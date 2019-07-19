@@ -3,6 +3,7 @@ Code for NPJDIGITALMED-00341R paper
 
 
 
+## File Description
 
 * HR_StatsAnalysis_Plots.ipynb : Contains code for all descriptive statistics, univariable and multivariable models as well as plots used in the paper.
 * HR_Validation.ipynb : Contains code for syncing the electrocardiogram and photoplethysmography signal, then derive the correlation.
@@ -12,7 +13,7 @@ Code for NPJDIGITALMED-00341R paper
 * SASS Analyses\within person variability.do : Contains code for describing HRV within person over time.
 
 
-Citation and Reference
+## Citation and Reference
 
 This work is published in the following paper in Nature Partner Journal Digital Medicine
 
